@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
 app.post('/', function(request, response) {
     var timestamp = Date.now();
 
-    var tmp = __dirname + '/tmp/' + timestamp;
+    var tmp = './tmp/' + timestamp;
     var pngFilename = timestamp + '.png';
     var svgFilename = timestamp + '.svg';
     var svgFile = tmp + svgFilename;
