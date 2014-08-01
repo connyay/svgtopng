@@ -18,8 +18,13 @@ app.use(function(req, res, next) {
 
 app.post('/', function(request, response) {
     var timestamp = Date.now();
+    
+    var tmpPath = __dirname + '/tmp';
+    if (!fs.existsSync(tmpPath)) {
+        fs.mkdirSync(tmpPath);
+    }
 
-    var tmp = './tmp/' + timestamp;
+    var tmp = tmpPath + '/' + timestamp;
     var pngFilename = timestamp + '.png';
     var svgFilename = timestamp + '.svg';
     var svgFile = tmp + svgFilename;
@@ -34,7 +39,7 @@ app.post('/', function(request, response) {
             response.set('file-name', pngFilename);
             response.send(prefix + base64);
         });
-        
+
     });
 })
 
