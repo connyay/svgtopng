@@ -1,4 +1,4 @@
-var express = require('express')
+var express = require('express');
 var fs = require('fs');
 var svg2png = require('svg2png');
 var uuid = require('node-uuid');
@@ -20,6 +20,10 @@ app.use(function(req, res, next) {
         req.rawBody = data;
         next();
     });
+});
+
+app.get('/', function(req, res, next) {
+	res.redirect('https://github.com/connyay/svgtopng');
 });
 
 app.post('/', function(req, res, next) {
@@ -74,4 +78,4 @@ app.get('/s/:svg', function(req, res, next) {
 
 app.listen(app.get('port'), function() {
     console.log("Node app is running at localhost:" + app.get('port'));
-})
+});
