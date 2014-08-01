@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "express": "^4.0.0",
-    "svg2png": "~1.1.0"
+    "svg2png": "~1.1.0",
+    "node-uuid": "~1.4.1"
   },
   "engines": {
     "node": "0.10.x"
