@@ -1,6 +1,7 @@
 var express = require('express')
 var fs = require('fs');
 var svg2png = require('svg2png');
+var path = require("path");
 var app = express();
 
 app.set('port', (process.env.PORT || 5000))
@@ -18,7 +19,8 @@ app.use(function(req, res, next) {
 
 app.post('/', function(request, response) {
     var timestamp = Date.now();
-    var tmp = 'tmp/' + timestamp;
+
+    var tmp = path.join(process.cwd(), 'tmp/') + timestamp;
     var pngFilename = timestamp + '.png';
     var svgFilename = timestamp + '.svg';
     var svgFile = tmp + svgFilename;
