@@ -9,6 +9,9 @@ app.set('port', (process.env.PORT || 5000));
 
 var TMP_PATH = __dirname + '/tmp/';
 
+if (!fs.existsSync(TMP_PATH)) {
+    fs.mkdirSync(TMP_PATH);
+}
 
 app.use(function(req, res, next) {
     var data = '';
@@ -36,25 +39,19 @@ app.get('/', function(req, res, next) {
 app.post('/', function(req, res, next) {
     var imgUUID = uuid.v4();
 
-    if (!fs.existsSync(TMP_PATH)) {
-        fs.mkdirSync(TMP_PATH);
-    }
-
     var tmp = TMP_PATH + imgUUID;
     var svgFile = tmp + '.svg';
     var pngFile = tmp + '.png';
 
-    fs.writeFileSync(svgFile, req.rawBody);
-    svg2png(svgFile, pngFile, function(err) {
+    fs.writeFile(svgFile, req.rawBody, function(err) {
         if (err) {
             return next(err);
         }
-        fs.readFile(pngFile, function(err, image) {
+        svg2png(svgFile, pngFile, function(err) {
             if (err) {
                 return next(err);
             }
             res.send(imgUUID);
-
         });
     });
 });
@@ -82,7 +79,6 @@ app.get('/i/:image/b64', function(req, res, next) {
 app.get('/s/:svg', function(req, res, next) {
     var svgFile = TMP_PATH + req.params.svg + '.svg';
     res.download(svgFile);
-
 });
 
 app.listen(app.get('port'), function() {
