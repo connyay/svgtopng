@@ -22,8 +22,14 @@ app.use(function(req, res, next) {
     });
 });
 
+app.all('*', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+    next();
+});
+
 app.get('/', function(req, res, next) {
-	res.redirect('https://github.com/connyay/svgtopng');
+    res.redirect('https://github.com/connyay/svgtopng');
 });
 
 app.post('/', function(req, res, next) {
@@ -56,7 +62,7 @@ app.get('/i/:image', function(req, res, next) {
 });
 
 app.get('/i/:image/b64', function(req, res, next) {
-	var pngFilename = req.params.image + '.png';
+    var pngFilename = req.params.image + '.png';
     var pngFile = TMP_PATH + pngFilename;
     fs.readFile(pngFile, function(err, image) {
         if (err) {
