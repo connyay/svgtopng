@@ -46,7 +46,9 @@ app.post('/', function(req, res, next) {
 
     fs.writeFileSync(svgFile, req.rawBody);
     svg2png(svgFile, pngFile, function(err) {
-        if (err) throw err;
+        if (err) {
+            return next(err);
+        }
         fs.readFile(pngFile, function(err, image) {
             if (err) {
                 return next(err);
