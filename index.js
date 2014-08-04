@@ -81,6 +81,36 @@ app.get('/s/:svg', function(req, res, next) {
     res.download(svgFile);
 });
 
+app.delete('/:uuid', function(req, res, next) {
+    var path = TMP_PATH + req.params.uuid;
+    var svgFile = path + '.svg';
+    var pngFile = path + '.png';
+
+    fs.exists(svgFile, function(exists) {
+        if (!exists) {
+            return;
+        }
+        fs.unlink(svgFile, function(err) {
+            if (err) {
+                return next(err);
+            }
+        });
+    });
+
+    fs.exists(pngFile, function(exists) {
+        if (!exists) {
+            return;
+        }
+        fs.unlink(pngFile, function(err) {
+            if (err) {
+                return next(err);
+            }
+        });
+    });
+
+    res.send();
+});
+
 app.listen(app.get('port'), function() {
     console.log("Node app is running at localhost:" + app.get('port'));
 });
