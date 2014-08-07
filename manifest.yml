@@ -1,0 +1,8 @@
+applications:
+- name: svgtopng
+  memory: 256M
+  instances: 1
+  command: node index.js
+  host: svgtopng
+  domain: mybluemix.net
+  path: .
