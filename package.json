@@ -4,7 +4,8 @@
   "description": "Converts SVG to PNG",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "docs": "apidoc -f index.js -e \"node_modules\" -o docs"
   },
   "dependencies": {
     "express": "^4.0.0",
