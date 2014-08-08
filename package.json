@@ -19,5 +19,9 @@
     "url": "https://github.com/connyay/svgtopng"
   },
   "author": "Connor Hindley",
-  "license": "MIT"
+  "license": "MIT",
+  "apidoc": {
+    "title": "Converts SVG to PNG",
+    "url" : "https://svgtopng.herokuapp.com"
+  }
 }
